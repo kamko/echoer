@@ -5,7 +5,7 @@
 Simple http server which echoes headers.
 
 ## Usage
-Automatically built container.
+Automatically built image.
 
 `docker run -p 80:80 kamko/echoer`
 
