@@ -1,4 +1,4 @@
-module github.com/kamko/echo-headers
+module github.com/kamko/echoer
 
 go 1.13
 
