@@ -2,7 +2,7 @@
 [![Actions Status](https://github.com/kamko/echoer/workflows/Docker%20build/badge.svg)](https://github.com/kamko/echoer/actions "docker build status badge")
 [![image metadata](https://images.microbadger.com/badges/image/kamko/echoer.svg)](https://microbadger.com/images/kamko/echoer "kamko/echoer image metadata")
 
-Simple http server which echoes headers.
+Simple http server which echoes HTTP requests.
 
 ## Usage
 Automatically built image.
@@ -10,20 +10,36 @@ Automatically built image.
 `docker run -p 80:80 kamko/echoer`
 
 ## Configuration
-set port via environment variable `PORT` (defaults to 80)
+via env vars (shown values are defaults)
+
+```
+PORT=80
+BODY_AS_STRING=TRUE
+```
 
 ## Example
 ```json
 {
-  "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-  "Accept-Encoding": "gzip, deflate",
-  "Accept-Language": "sk,en-US;q=0.7,en;q=0.3",
-  "Cache-Control": "max-age=0",
-  "Connection": "keep-alive",
-  "Cookie": "JSESSIONID=26CB92A40E1C5D145B54D3FD3C145112",
-  "Dnt": "1",
-  "Upgrade-Insecure-Requests": "1",
-  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0"
+  "body": "{\n\t\"value1\": \"ABC\"\n}",
+  "headers": {
+    "Accept": "*/*",
+    "Content-Length": "20",
+    "User-Agent": "insomnia/7.0.6"
+  },
+  "uri": "/?param1=1&param2=2"
+}
+```
+
+When `BODY_AS_STRING` is set to false the body is returned as [base64 string](https://golang.org/pkg/encoding/json/).
+```json
+{
+  "body": "ewoJInZhbHVlMSI6ICJBQkMiCn0=",
+  "headers": {
+    "Accept": "*/*",
+    "Content-Length": "20",
+    "User-Agent": "insomnia/7.0.6"
+  },
+  "uri": "/?param1=1&param2=2"
 }
 ```
 
