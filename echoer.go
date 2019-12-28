@@ -55,7 +55,7 @@ func shouldRenderBodyAsString() bool {
 	val, present := os.LookupEnv("BODY_AS_STRING")
 	if present {
 		boolVal, err := strconv.ParseBool(val)
-		if err != nil {
+		if err == nil {
 			return boolVal
 		}
 	}
@@ -69,7 +69,7 @@ func port() (port string) {
 	val, present := os.LookupEnv("PORT")
 	if present {
 		tPort, err := strconv.Atoi(val)
-		if err != nil {
+		if err == nil {
 			port = strconv.Itoa(tPort)
 		}
 	}
